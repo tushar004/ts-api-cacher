@@ -11,3 +11,34 @@
     "typescript": "^4.x.x"
   }
 }
+
+{
+  "name": "api-request-cacher-ts",
+  "version": "1.0.0",
+  "description": "A TypeScript-based API request cacher with configurable caching.",
+  "main": "dist/index.js",  // Path to your compiled JavaScript file
+  "types": "dist/index.d.ts",  // Path to your TypeScript declaration file
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/api-request-cacher-ts.git"
+  },
+  "keywords": [
+    "API",
+    "fetch",
+    "XHR",
+    "request",
+    "cacher",
+    "TypeScript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/your-username/api-request-cacher-ts/issues"
+  },
+  "homepage": "https://github.com/your-username/api-request-cacher-ts#readme"
+}
+
