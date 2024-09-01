@@ -1,9 +1,9 @@
 {
   "name": "api-request-cacher-ts",
-  "version": "1.0.1",
+  "version": "1.2",
   "description": "A TypeScript-based API request cacher with configurable caching.",
-  "main": "dist/index.js",  
-  "types": "dist/index.d.ts",  
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build"
@@ -25,6 +25,8 @@
   "bugs": {
     "url": "https://github.com/tushar004/ts-api-cacher/issues"
   },
-  "homepage": "https://github.com/tushar004/ts-api-cacher/blob/main/README.md"
+  "homepage": "https://github.com/tushar004/ts-api-cacher/blob/main/README.md",
+  "dependencies": {
+    "rxjs": "^7.8.1"
+  }
 }
-
