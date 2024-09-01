@@ -1,6 +1,6 @@
 {
   "name": "api-request-cacher-ts",
-  "version": "1.2",
+  "version": "1.0.2",
   "description": "A TypeScript-based API request cacher with configurable caching.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
