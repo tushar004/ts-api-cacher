@@ -39,19 +39,21 @@ Usage
 
 3.  ## Basic Usage
 
-    const apiCacher = new APIRequestCacher(5); // Cache duration set to 5 seconds
+    ### Example
 
-    // Using Promises
-    apiCacher.get<{ data: string }>('https://api.example.com/data')
-    .then(response => console.log('GET Response (Promise):', response))
-    .catch(error => console.error('GET Error (Promise):', error));
+         const apiCacher = new APIRequestCacher(5); // Cache duration set to 5 seconds
 
-    // Using Observables
-    apiCacher.getObservable<{ data: string }>('https://api.example.com/data')
-    .subscribe({
-    next: response => console.log('GET Response (Observable):', response),
-    error: error => console.error('GET Error (Observable):', error)
-    });
+         // Using Promises
+         apiCacher.get<{ data: string }>('https://api.example.com/data')
+         .then(response => console.log('GET Response (Promise):', response))
+         .catch(error => console.error('GET Error (Promise):', error));
+
+         // Using Observables
+         apiCacher.getObservable<{ data: string }>('https://api.example.com/data')
+         .subscribe({
+         next: response => console.log('GET Response (Observable):', response),
+         error: error => console.error('GET Error (Observable):', error)
+         });
 
     ### API Methods
 
@@ -65,11 +67,13 @@ Usage
          Returns: A Promise resolving to the response.
 
     getObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
+
          Description: Makes a GET request with caching support, returning an Observable.
          Parameters: Same as get.
          Returns: An Observable emitting the response.
 
     post<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
+
          Description: Makes a POST request with caching support.
          Parameters:
          url: The URL for the request.
@@ -79,26 +83,31 @@ Usage
          Returns: A Promise resolving to the response.
 
     postObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
+
          Description: Makes a POST request with caching support, returning an Observable.
          Parameters: Same as post.
          Returns: An Observable emitting the response.
 
     put<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
+
          Description: Makes a PUT request with caching support.
          Parameters: Same as post.
          Returns: A Promise resolving to the response.
 
     putObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
+
          Description: Makes a PUT request with caching support, returning an Observable.
          Parameters: Same as put.
          Returns: An Observable emitting the response.
 
     delete<T>(url: string, options?: RequestInit, force?: boolean): Promise<T>
+
          Description: Makes a DELETE request with caching support.
          Parameters: Same as get.
          Returns: A Promise resolving to the response.
 
     deleteObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
+
          Description: Makes a DELETE request with caching support, returning an Observable.
          Parameters: Same as get.
          Returns: An Observable emitting the response.
@@ -133,12 +142,13 @@ Usage
 
 ## Configuration
 
-   constructor(
-   cacheDurationInSeconds: number = 3,
-   beforeRequestHooks: (() => void)[] = [],
-   afterRequestHooks: ((response: any) => void)[] = []
-   )
+constructor(
 
-   cacheDurationInSeconds: Duration (in seconds) to cache the API responses. Default is 3.
-   beforeRequestHooks: Array of functions to be executed before each API call.
-   afterRequestHooks: Array of functions to be executed after each API call, with the response passed as an argument.
+      cacheDurationInSeconds: number = 3,
+      beforeRequestHooks: (() => void)[] = [],
+      afterRequestHooks: ((response: any) => void)[] = []
+      )
+
+cacheDurationInSeconds: Duration (in seconds) to cache the API responses. Default is 3.
+beforeRequestHooks: Array of functions to be executed before each API call.
+afterRequestHooks: Array of functions to be executed after each API call, with the response passed as an argument.
