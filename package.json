@@ -18,7 +18,11 @@
     "XHR",
     "request",
     "cacher",
-    "TypeScript"
+    "TypeScript",
+    "Observable",
+    "hooks",
+    "HTTP",
+    "Client"
   ],
   "author": "Tushar Vashistha",
   "license": "MIT",
