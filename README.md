@@ -14,9 +14,9 @@ A TypeScript-based API request cacher that supports `GET`, `POST`, `PUT`, and `D
 
 Install the package using npm:
 
-     ```
-     npm install api-request-cacher-ts
-     ```
+```
+npm install api-request-cacher-ts
+```
 
 ## Usage
 
@@ -69,60 +69,60 @@ Usage
 
     ### API Methods
 
-    get<T>(url: string, options?: RequestInit, force?: boolean): Promise<T>
+    #### get<T>(url: string, options?: RequestInit, force?: boolean): Promise<T>
 
-         Description: Makes a GET request with caching support.
-         Parameters:
-         url: The URL for the request.
-         options: Optional RequestInit object to configure the request.
-         force: When true, bypasses the cache and makes a fresh request.
-         Returns: A Promise resolving to the response.
+    Description: Makes a GET request with caching support.
+    Parameters:
+    url: The URL for the request.
+    options: Optional RequestInit object to configure the request.
+    force: When true, bypasses the cache and makes a fresh request.
+    Returns: A Promise resolving to the response.
 
-    getObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
+    #### getObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
 
-         Description: Makes a GET request with caching support, returning an Observable.
-         Parameters: Same as get.
-         Returns: An Observable emitting the response.
+    Description: Makes a GET request with caching support, returning an Observable.
+    Parameters: Same as get.
+    Returns: An Observable emitting the response.
 
-    post<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
+    ##### post<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
 
-         Description: Makes a POST request with caching support.
-         Parameters:
-         url: The URL for the request.
-         body: The body of the request.
-         options: Optional RequestInit object to configure the request.
-         force: When true, bypasses the cache and makes a fresh request.
-         Returns: A Promise resolving to the response.
+    Description: Makes a POST request with caching support.
+    Parameters:
+    url: The URL for the request.
+    body: The body of the request.
+    options: Optional RequestInit object to configure the request.
+    force: When true, bypasses the cache and makes a fresh request.
+    Returns: A Promise resolving to the response.
 
-    postObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
+    #### postObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
 
-         Description: Makes a POST request with caching support, returning an Observable.
-         Parameters: Same as post.
-         Returns: An Observable emitting the response.
+    Description: Makes a POST request with caching support, returning an Observable.
+    Parameters: Same as post.
+    Returns: An Observable emitting the response.
 
-    put<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
+    #### put<T>(url: string, body: any, options?: RequestInit, force?: boolean): Promise<T>
 
-         Description: Makes a PUT request with caching support.
-         Parameters: Same as post.
-         Returns: A Promise resolving to the response.
+    Description: Makes a PUT request with caching support.
+    Parameters: Same as post.
+    Returns: A Promise resolving to the response.
 
-    putObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
+    #### putObservable<T>(url: string, body: any, options?: RequestInit, force?: boolean): Observable<T>
 
-         Description: Makes a PUT request with caching support, returning an Observable.
-         Parameters: Same as put.
-         Returns: An Observable emitting the response.
+    Description: Makes a PUT request with caching support, returning an Observable.
+    Parameters: Same as put.
+    Returns: An Observable emitting the response.
 
-    delete<T>(url: string, options?: RequestInit, force?: boolean): Promise<T>
+    #### delete<T>(url: string, options?: RequestInit, force?: boolean): Promise<T>
 
-         Description: Makes a DELETE request with caching support.
-         Parameters: Same as get.
-         Returns: A Promise resolving to the response.
+    Description: Makes a DELETE request with caching support.
+    Parameters: Same as get.
+    Returns: A Promise resolving to the response.
 
-    deleteObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
+    #### deleteObservable<T>(url: string, options?: RequestInit, force?: boolean): Observable<T>
 
-         Description: Makes a DELETE request with caching support, returning an Observable.
-         Parameters: Same as get.
-         Returns: An Observable emitting the response.
+    Description: Makes a DELETE request with caching support, returning an Observable.
+    Parameters: Same as get.
+    Returns: An Observable emitting the response.
 
 4.  ## Force API Request (Bypassing Cache)
 
