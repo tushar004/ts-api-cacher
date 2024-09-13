@@ -14,7 +14,7 @@ A TypeScript-based API request cacher that supports `GET`, `POST`, `PUT`, and `D
 
 Install the package using npm:
 
-     ```bash
+     ```
      npm install api-request-cacher-ts
      ```
 
@@ -27,7 +27,7 @@ Usage
     To use the API request handler in your TypeScript project,
     start by importing the APIRequestCacher class:
 
-    ```typescript
+    ```
     import \* as APIRequestCacher from 'api-request-handler-ts';
     ```
 
@@ -35,13 +35,13 @@ Usage
 
     When creating an instance of APIRequestCacher, you can configure the cache duration. By default, the cache duration is 3 seconds, but you can change this by passing a different value to the constructor.
 
-    ```typescript
+    ```
     const apiHandler = new APIRequestCacher(5); // Custom cache duration of 5 seconds
     ```
 
     // or
 
-    ```typescript
+    ```
     const apiHandler = new APIRequestCacher(); // Default cache duration of 3 seconds
     ```
 
@@ -49,7 +49,7 @@ Usage
 
     ### Example
 
-    ```typescript
+    ```
     const apiCacher = new APIRequestCacher(5); // Cache duration set to 5 seconds
 
     // Using Promises
@@ -128,7 +128,7 @@ Usage
 
     If you want to force an API request regardless of caching, pass true as the third argument.
 
-    ```typescript
+    ```
     apiHandler
       .request<{ data: string }>("https://api.example.com/data", {}, true)
       .then((response) => console.log(response.data))
@@ -145,7 +145,7 @@ Usage
 
 // Define hooks
 
-     ```typescript
+     ```
      const beforeRequestHook = () => console.log("Before Request");
      const afterRequestHook = (response: any) =>
      console.log("After Request, Response:", response);
@@ -153,7 +153,7 @@ Usage
 
 // Create an instance with hooks
 
-     ```typescript
+     ```
      const apiCacherWithHooks = new APIRequestCacher(
      5,
      [beforeRequestHook],
@@ -163,7 +163,7 @@ Usage
 
 // Example usage with hooks
 
-     ```typescript
+     ```
      apiCacherWithHooks
      .get<{ data: string }>("https://api.example.com/data")
      .then((response) =>
@@ -174,7 +174,7 @@ Usage
 
 // Modifying the Request Headers or Body in Hooks
 
-     ```typescript
+     ```
      import { APIRequestCacher } from "api-request-cacher-ts";
 
      // Hook to modify the request (e.g., adding a token to headers)
@@ -201,7 +201,7 @@ Usage
 
 // Observable Usage
 
-     ```typescript
+     ```
      import { APIRequestCacher } from "api-request-cacher-ts";
 
      // Hook to modify the request (e.g., adding a token to headers)
@@ -231,7 +231,7 @@ Usage
 
 ## Configuration
 
-     ```typescript
+     ```
      constructor(
           cacheDurationInSeconds: number = 3,
           beforeRequestHooks: (() => void)[] = [],
