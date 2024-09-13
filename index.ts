@@ -1,14 +1,14 @@
-import { Observable, from } from "rxjs";
+import { from, Observable } from "rxjs";
 
 export class APIRequestCacher {
   private cache: Map<string, { timestamp: number; data: any }> = new Map();
   private cacheDuration: number;
-  private beforeRequestHooks: (() => void)[];
+  private beforeRequestHooks: ((options: RequestInit) => void)[];
   private afterRequestHooks: ((response: any) => void)[];
 
   constructor(
     cacheDurationInSeconds: number = 3,
-    beforeRequestHooks: (() => void)[] = [],
+    beforeRequestHooks: ((options: RequestInit) => void)[] = [],
     afterRequestHooks: ((response: any) => void)[] = []
   ) {
     this.cacheDuration = cacheDurationInSeconds * 1000; // Convert seconds to milliseconds
@@ -42,8 +42,8 @@ export class APIRequestCacher {
     this.cache.set(cacheKey, { timestamp: Date.now(), data });
   }
 
-  private executeBeforeRequestHooks(): void {
-    this.beforeRequestHooks.forEach((hook) => hook());
+  private executeBeforeRequestHooks(options: RequestInit): void {
+    this.beforeRequestHooks.forEach((hook) => hook(options));
   }
 
   private executeAfterRequestHooks(response: any): void {
@@ -164,8 +164,8 @@ export class APIRequestCacher {
       return Promise.resolve(this.cache.get(cacheKey)!.data);
     }
 
-    // Execute before-request hooks
-    this.executeBeforeRequestHooks();
+    // Execute before-request hooks, allowing options to be modified
+    this.executeBeforeRequestHooks(options);
 
     return fetch(url, options)
       .then((response) => response.json())

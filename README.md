@@ -7,14 +7,16 @@ A TypeScript-based API request cacher that supports `GET`, `POST`, `PUT`, and `D
 - Supports `GET`, `POST`, `PUT`, and `DELETE` requests.
 - **Caching**: Cache API responses for a configurable duration to reduce redundant requests.
 - **Supports `Promise` and `Observable`**: Choose between `Promise`-based or `Observable`-based API calls.
-- **Pre-request and Post-request Hooks**: Execute custom logic before and after API calls.
+- **Pre-request and Post-request Hooks**: Modify the request before it is sent and execute custom logic after receiving the response.
 - Force option to bypass caching when needed.
 
 ## Installation
 
 Install the package using npm:
 
-npm install api-request-cacher-ts
+     ```bash
+     npm install api-request-cacher-ts
+     ```
 
 ## Usage
 
@@ -25,35 +27,45 @@ Usage
     To use the API request handler in your TypeScript project,
     start by importing the APIRequestCacher class:
 
+    ```typescript
     import \* as APIRequestCacher from 'api-request-handler-ts';
+    ```
 
 2.  ## Creating an Instance of APIRequestCacher
 
     When creating an instance of APIRequestCacher, you can configure the cache duration. By default, the cache duration is 3 seconds, but you can change this by passing a different value to the constructor.
 
+    ```typescript
     const apiHandler = new APIRequestCacher(5); // Custom cache duration of 5 seconds
+    ```
 
     // or
 
+    ```typescript
     const apiHandler = new APIRequestCacher(); // Default cache duration of 3 seconds
+    ```
 
 3.  ## Basic Usage
 
     ### Example
 
-         const apiCacher = new APIRequestCacher(5); // Cache duration set to 5 seconds
+    ```typescript
+    const apiCacher = new APIRequestCacher(5); // Cache duration set to 5 seconds
 
-         // Using Promises
-         apiCacher.get<{ data: string }>('https://api.example.com/data')
-         .then(response => console.log('GET Response (Promise):', response))
-         .catch(error => console.error('GET Error (Promise):', error));
+    // Using Promises
+    apiCacher
+      .get<{ data: string }>("https://api.example.com/data")
+      .then((response) => console.log("GET Response (Promise):", response))
+      .catch((error) => console.error("GET Error (Promise):", error));
 
-         // Using Observables
-         apiCacher.getObservable<{ data: string }>('https://api.example.com/data')
-         .subscribe({
-         next: response => console.log('GET Response (Observable):', response),
-         error: error => console.error('GET Error (Observable):', error)
-         });
+    // Using Observables
+    apiCacher
+      .getObservable<{ data: string }>("https://api.example.com/data")
+      .subscribe({
+        next: (response) => console.log("GET Response (Observable):", response),
+        error: (error) => console.error("GET Error (Observable):", error),
+      });
+    ```
 
     ### API Methods
 
@@ -115,9 +127,13 @@ Usage
 4.  ## Force API Request (Bypassing Cache)
 
     If you want to force an API request regardless of caching, pass true as the third argument.
-    apiHandler.request<{ data: string }>('https://api.example.com/data', {}, true)
-    .then(response => console.log(response.data))
-    .catch(error => console.error(error));
+
+    ```typescript
+    apiHandler
+      .request<{ data: string }>("https://api.example.com/data", {}, true)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error(error));
+    ```
 
 5.  ## Setting Up Hooks
 
@@ -129,25 +145,99 @@ Usage
 
 // Define hooks
 
-    const beforeRequestHook = () => console.log('Before Request');
-    const afterRequestHook = (response: any) => console.log('After Request, Response:', response);
+     ```typescript
+     const beforeRequestHook = () => console.log("Before Request");
+     const afterRequestHook = (response: any) =>
+     console.log("After Request, Response:", response);
+     ```
 
-    // Create an instance with hooks
-    const apiCacherWithHooks = new APIRequestCacher(5, [beforeRequestHook], [afterRequestHook]);
+// Create an instance with hooks
 
-    // Example usage with hooks
-    apiCacherWithHooks.get<{ data: string }>('https://api.example.com/data')
-    .then(response => console.log('GET Response (Promise) with Hooks:', response))
-    .catch(error => console.error('GET Error (Promise) with Hooks:', error));
+     ```typescript
+     const apiCacherWithHooks = new APIRequestCacher(
+     5,
+     [beforeRequestHook],
+     [afterRequestHook]
+     );
+     ```
+
+// Example usage with hooks
+
+     ```typescript
+     apiCacherWithHooks
+     .get<{ data: string }>("https://api.example.com/data")
+     .then((response) =>
+     console.log("GET Response (Promise) with Hooks:", response)
+     )
+     .catch((error) => console.error("GET Error (Promise) with Hooks:", error));
+     ```
+
+// Modifying the Request Headers or Body in Hooks
+
+     ```typescript
+     import { APIRequestCacher } from "api-request-cacher-ts";
+
+     // Hook to modify the request (e.g., adding a token to headers)
+     const addAuthToken = (options: RequestInit) => {
+     if (!options.headers) {
+     options.headers = {};
+     }
+     (options.headers as Record<string, string>)["Authorization"] =
+     "Bearer myToken";
+     };
+
+     // Hook to log the response after the request is made
+     const logResponse = (response: any) => console.log("Response:", response);
+
+     // Create an APIRequestCacher instance with hooks
+     const apiCacher = new APIRequestCacher(5, [addAuthToken], [logResponse]);
+
+     // Make a GET request, headers will include the Authorization token
+     apiCacher
+     .get<{ data: string }>("https://api.example.com/data")
+     .then((response) => console.log("GET Response:", response))
+     .catch((error) => console.error("Error:", error));
+     ```
+
+// Observable Usage
+
+     ```typescript
+     import { APIRequestCacher } from "api-request-cacher-ts";
+
+     // Hook to modify the request (e.g., adding a token to headers)
+     const addCustomHeader = (options: RequestInit) => {
+     if (!options.headers) {
+     options.headers = {};
+     }
+     (options.headers as Record<string, string>)["X-Custom-Header"] =
+     "CustomValue";
+     };
+
+     // Hook to log the response
+     const logResponse = (response: any) =>
+     console.log("Response after API call:", response);
+
+     // Create an instance of APIRequestCacher with hooks
+     const apiCacher = new APIRequestCacher(3, [addCustomHeader], [logResponse]);
+
+     // Making a GET request using Observable
+     apiCacher
+     .getObservable<{ data: string }>("https://api.example.com/data")
+     .subscribe({
+     next: (response) => console.log("GET Response (Observable):", response),
+     error: (error) => console.error("Error:", error),
+     });
+     ```
 
 ## Configuration
 
-constructor(
-
-      cacheDurationInSeconds: number = 3,
-      beforeRequestHooks: (() => void)[] = [],
-      afterRequestHooks: ((response: any) => void)[] = []
-      )
+     ```typescript
+     constructor(
+          cacheDurationInSeconds: number = 3,
+          beforeRequestHooks: (() => void)[] = [],
+          afterRequestHooks: ((response: any) => void)[] = []
+          )
+     ```
 
 cacheDurationInSeconds: Duration (in seconds) to cache the API responses. Default is 3.
 beforeRequestHooks: Array of functions to be executed before each API call.
