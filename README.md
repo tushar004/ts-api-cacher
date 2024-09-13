@@ -143,101 +143,101 @@ Usage
 
     #### Example
 
-// Define hooks
+    // Define hooks
 
-     ```
-     const beforeRequestHook = () => console.log("Before Request");
-     const afterRequestHook = (response: any) =>
-     console.log("After Request, Response:", response);
-     ```
+    ```
+    const beforeRequestHook = () => console.log("Before Request");
+    const afterRequestHook = (response: any) =>
+    console.log("After Request, Response:", response);
+    ```
 
-// Create an instance with hooks
+    // Create an instance with hooks
 
-     ```
-     const apiCacherWithHooks = new APIRequestCacher(
-     5,
-     [beforeRequestHook],
-     [afterRequestHook]
-     );
-     ```
+    ```
+    const apiCacherWithHooks = new APIRequestCacher(
+    5,
+    [beforeRequestHook],
+    [afterRequestHook]
+    );
+    ```
 
-// Example usage with hooks
+    // Example usage with hooks
 
-     ```
-     apiCacherWithHooks
-     .get<{ data: string }>("https://api.example.com/data")
-     .then((response) =>
-     console.log("GET Response (Promise) with Hooks:", response)
-     )
-     .catch((error) => console.error("GET Error (Promise) with Hooks:", error));
-     ```
+    ```
+    apiCacherWithHooks
+    .get<{ data: string }>("https://api.example.com/data")
+    .then((response) =>
+    console.log("GET Response (Promise) with Hooks:", response)
+    )
+    .catch((error) => console.error("GET Error (Promise) with Hooks:", error));
+    ```
 
-// Modifying the Request Headers or Body in Hooks
+    // Modifying the Request Headers or Body in Hooks
 
-     ```
-     import { APIRequestCacher } from "api-request-cacher-ts";
+    ```
+    import { APIRequestCacher } from "api-request-cacher-ts";
 
-     // Hook to modify the request (e.g., adding a token to headers)
-     const addAuthToken = (options: RequestInit) => {
-     if (!options.headers) {
-     options.headers = {};
-     }
-     (options.headers as Record<string, string>)["Authorization"] =
-     "Bearer myToken";
-     };
+    // Hook to modify the request (e.g., adding a token to headers)
+    const addAuthToken = (options: RequestInit) => {
+    if (!options.headers) {
+    options.headers = {};
+    }
+    (options.headers as Record<string, string>)["Authorization"] =
+    "Bearer myToken";
+    };
 
-     // Hook to log the response after the request is made
-     const logResponse = (response: any) => console.log("Response:", response);
+    // Hook to log the response after the request is made
+    const logResponse = (response: any) => console.log("Response:", response);
 
-     // Create an APIRequestCacher instance with hooks
-     const apiCacher = new APIRequestCacher(5, [addAuthToken], [logResponse]);
+    // Create an APIRequestCacher instance with hooks
+    const apiCacher = new APIRequestCacher(5, [addAuthToken], [logResponse]);
 
-     // Make a GET request, headers will include the Authorization token
-     apiCacher
-     .get<{ data: string }>("https://api.example.com/data")
-     .then((response) => console.log("GET Response:", response))
-     .catch((error) => console.error("Error:", error));
-     ```
+    // Make a GET request, headers will include the Authorization token
+    apiCacher
+    .get<{ data: string }>("https://api.example.com/data")
+    .then((response) => console.log("GET Response:", response))
+    .catch((error) => console.error("Error:", error));
+    ```
 
-// Observable Usage
+    // Observable Usage
 
-     ```
-     import { APIRequestCacher } from "api-request-cacher-ts";
+    ```
+    import { APIRequestCacher } from "api-request-cacher-ts";
 
-     // Hook to modify the request (e.g., adding a token to headers)
-     const addCustomHeader = (options: RequestInit) => {
-     if (!options.headers) {
-     options.headers = {};
-     }
-     (options.headers as Record<string, string>)["X-Custom-Header"] =
-     "CustomValue";
-     };
+    // Hook to modify the request (e.g., adding a token to headers)
+    const addCustomHeader = (options: RequestInit) => {
+    if (!options.headers) {
+    options.headers = {};
+    }
+    (options.headers as Record<string, string>)["X-Custom-Header"] =
+    "CustomValue";
+    };
 
-     // Hook to log the response
-     const logResponse = (response: any) =>
-     console.log("Response after API call:", response);
+    // Hook to log the response
+    const logResponse = (response: any) =>
+    console.log("Response after API call:", response);
 
-     // Create an instance of APIRequestCacher with hooks
-     const apiCacher = new APIRequestCacher(3, [addCustomHeader], [logResponse]);
+    // Create an instance of APIRequestCacher with hooks
+    const apiCacher = new APIRequestCacher(3, [addCustomHeader], [logResponse]);
 
-     // Making a GET request using Observable
-     apiCacher
-     .getObservable<{ data: string }>("https://api.example.com/data")
-     .subscribe({
-     next: (response) => console.log("GET Response (Observable):", response),
-     error: (error) => console.error("Error:", error),
-     });
-     ```
+    // Making a GET request using Observable
+    apiCacher
+    .getObservable<{ data: string }>("https://api.example.com/data")
+    .subscribe({
+    next: (response) => console.log("GET Response (Observable):", response),
+    error: (error) => console.error("Error:", error),
+    });
+    ```
 
 ## Configuration
 
-     ```
-     constructor(
-          cacheDurationInSeconds: number = 3,
-          beforeRequestHooks: (() => void)[] = [],
-          afterRequestHooks: ((response: any) => void)[] = []
-          )
-     ```
+```
+constructor(
+     cacheDurationInSeconds: number = 3,
+     beforeRequestHooks: (() => void)[] = [],
+     afterRequestHooks: ((response: any) => void)[] = []
+     )
+```
 
 cacheDurationInSeconds: Duration (in seconds) to cache the API responses. Default is 3.
 beforeRequestHooks: Array of functions to be executed before each API call.
