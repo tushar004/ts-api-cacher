@@ -1,6 +1,6 @@
 {
   "name": "api-request-cacher-ts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A TypeScript-based API request cacher with configurable caching.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,8 @@
     "Observable",
     "hooks",
     "HTTP",
-    "Client"
+    "Client",
+    "Encryption"
   ],
   "author": "Tushar Vashistha",
   "license": "MIT",
@@ -31,6 +32,8 @@
   },
   "homepage": "https://github.com/tushar004/ts-api-cacher/blob/main/README.md",
   "dependencies": {
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "@types/crypto-js": "^4.2.2",
+    "crypto-js": "^4.2.0"
   }
 }

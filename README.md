@@ -146,7 +146,7 @@ Usage
     // Define hooks
 
     ```
-    const beforeRequestHook = () => console.log("Before Request");
+    const beforeRequestHook = (options: RequestInit) => console.log("Before Request");
     const afterRequestHook = (response: any) =>
     console.log("After Request, Response:", response);
     ```
@@ -229,16 +229,45 @@ Usage
     });
     ```
 
+6.  ## Encryption
+
+    ### Using Optional Encryption
+
+    You can enable encryption for the request body by providing an encryption key and setting the `encryptRequests` flag to `true`. The request body will be encrypted using the AES algorithm.
+
+    ```typescript
+    import { APIRequestCacher } from "api-request-cacher-ts";
+
+    // Creating an instance with encryption enabled
+    const apiCacherWithEncryption = new APIRequestCacher(
+      5, // Cache duration in seconds
+      [], // Before request hooks
+      [], // After request hooks
+      "my-secret-key", // Encryption key
+      true // Enable encryption
+    );
+
+    // Making an encrypted POST request
+    apiCacherWithEncryption
+      .post("https://api.example.com/data", { key: "value" })
+      .then((response) => console.log("POST Response:", response))
+      .catch((error) => console.error("POST Error:", error));
+    ```
+
 ## Configuration
 
 ```
 constructor(
      cacheDurationInSeconds: number = 3,
-     beforeRequestHooks: (() => void)[] = [],
-     afterRequestHooks: ((response: any) => void)[] = []
+     beforeRequestHooks: ((options: RequestInit) => void)[] = [],
+     afterRequestHooks: ((response: any) => void)[] = [],
+     encryptionKey: string,
+     enableEncryption: boolean
      )
 ```
 
 cacheDurationInSeconds: Duration (in seconds) to cache the API responses. Default is 3.
 beforeRequestHooks: Array of functions to be executed before each API call.
 afterRequestHooks: Array of functions to be executed after each API call, with the response passed as an argument.
+encryptionKey: Encryption key
+enableEncryption: Enable encryption
